@@ -1,10 +1,18 @@
 import React from "react";
+import { Fragment, useState } from "react";
 
 const Login = (prop) => {
     return (
-        <div>
-            <h1> holis estoy usando react wi </h1>
-        </div>
+        <Fragment>
+            <form>
+                <input placeholder="Ingresa tu correo eléctronico">
+                </input>
+                <input placeholder="Ingresa tu contraseña">
+                </input>
+
+                <button type= "submit">Ingresar</button>
+            </form>
+        </Fragment>
     )
 }
 
