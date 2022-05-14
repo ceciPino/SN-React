@@ -1,13 +1,19 @@
-import React from "react";
-import Login from "./Login"
-import Register from "./Register";
+import { useAuth } from "../context/authContext";
 
-const Home = (prop) => {
+export function Home() {
+   const {user} = useAuth()
+   console.log(user);
+    return <div>home</div>;
+}
+
+
+
+/*const Home = (prop) => {
     return (
         <div> 
             <Login/>
         </div>
     )
 }
-
-export default Home
+*/
+export default Home;

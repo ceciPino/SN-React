@@ -3,26 +3,24 @@ import { Fragment, useState } from "react";
 
 const Login = () => {
 
-    const [datos, setDatos] = useState({
+    const [user, setUser] = useState({
         email: '',
         password: ''
     })
-
-    console.log(datos);
+    console.log(user);
 
     const handleInputEmailChange = (event) => {
 
         console.log(event.target.value)
-        setDatos({
-            ...datos,
+        setUser({
+            ...user,
             email: event.target.value
         })
     }
 
     const handleInputPassword =(event) => {
-        
-        setDatos({
-            ...datos,
+        setUser({
+            ...user,
             password: event.target.value
         })
 
@@ -30,15 +28,15 @@ const Login = () => {
 
     const enviarDatos = (event) => {
         event.preventDefault()
-        console.log('enviando datos...' + datos.email + '' + datos.password)
+        console.log('usuario: ' + user.email + ' ' + 'password: ' + user.password)
     }
 
     return (
         <Fragment>
             <form onSubmit={enviarDatos}>
-                <input type='text' placeholder="Ingresa tu correo eléctronico" onChange={handleInputEmailChange} name="email" >
+                <input type='email' placeholder="Ingresa tu correo eléctronico" onChange={handleInputEmailChange} name="email" id="email" >
                 </input>
-                <input type='password' placeholder="Ingresa tu contraseña" onChange={handleInputPassword} name="password">
+                <input type='password' placeholder="Ingresa tu contraseña" onChange={handleInputPassword} name="password" id="password">
                 </input>
 
                 <button type='submit'>Ingresar</button>
