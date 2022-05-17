@@ -1,48 +1,69 @@
-import React from "react";
 import { Fragment, useState } from "react";
+import { useAuth } from "../context/authContext";
+import { useNavigate } from "react-router-dom";
 
-const Login = () => {
-
+export function Login() {
     const [user, setUser] = useState({
-        email: '',
-        password: ''
-    })
-    console.log(user);
+        email: "",
+        password: "",
+    });
 
-    const handleInputEmailChange = (event) => {
+    const { login } = useAuth()
+    const navigate = useNavigate()
+    const [error, setError] = useState();
 
-        console.log(event.target.value)
-        setUser({
-            ...user,
-            email: event.target.value
-        })
-    }
 
-    const handleInputPassword =(event) => {
-        setUser({
-            ...user,
-            password: event.target.value
-        })
+    const handleChange = ({ target: { name, value } }) =>
+        setUser({ ...user, [name]: value })
 
-    }
 
-    const enviarDatos = (event) => {
-        event.preventDefault()
-        console.log('usuario: ' + user.email + ' ' + 'password: ' + user.password)
+    const handleSubmit = async e => {
+        e.preventDefault();
+        setError('')
+        try {
+            await login(user.email, user.password)
+            navigate('/')
+        } catch (error) {
+            //console.log(error.code);
+
+            //aquí podemos manejar los errores de forma que se imprima el mensaje en pantalla
+            //if(error.code === "auth/internal-error") {
+            //setError("correo invalido")
+            //}
+
+            setError(error.message);
+        }
+
     }
 
     return (
-        <Fragment>
-            <form onSubmit={enviarDatos}>
-                <input type='email' placeholder="Ingresa tu correo eléctronico" onChange={handleInputEmailChange} name="email" id="email" >
-                </input>
-                <input type='password' placeholder="Ingresa tu contraseña" onChange={handleInputPassword} name="password" id="password">
-                </input>
+        <div>
 
-                <button type='submit'>Ingresar</button>
-            </form>
-        </Fragment>
-    )
+            {error && <p>{error}</p>}
+
+            <Fragment>
+                <form onSubmit={handleSubmit}>
+
+                    <input
+                        type="email"
+                        placeholder="ingresa tu correo electrónico"
+                        name="email"
+                        onChange={handleChange}>
+                    </input>
+
+                    <input
+                        type="password"
+                        placeholder="ingresa tu contraseña"
+                        name="password"
+                        onChange={handleChange}>
+                    </input>
+
+                    <button type="submit"> Ingresar</button>
+                </form>
+            </Fragment>
+        </div>
+
+    );
 }
 
 export default Login;
