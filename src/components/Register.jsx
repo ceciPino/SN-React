@@ -1,12 +1,30 @@
 import { Fragment, useState } from "react";
+import { useAuth } from "../context/authContext";
 
-const Register = () => {
+export function Register() {
+    const [user, setUser] = useState({
+        nombre: "",
+        email: "",
+        password:"", 
+    });
+    const { signup } = useAuth()
+
+    const handleChange = ({target: {name, value}}) =>
+        setUser({...user, [name]:value})
+    
+
+    const handleSubmit = e => {
+        e.preventDefault()
+        signup(user.email, user.password)
+    }
+
+
     return(
         <Fragment>
-            <form>
-                <input placeholder="ingresa tu nombre de usuario"></input>
-                <input placeholder="ingresa tu correo electrónico"></input>
-                <input placeholder="ingresa tu contraseña"></input>
+            <form onSubmit={handleSubmit}>
+                <input type="text" placeholder="ingresa tu nombre de usuario" name="nombre" onChange={handleChange}></input>
+                <input type="email" placeholder="ingresa tu correo electrónico" name="email" onChange={handleChange}></input>
+                <input type="password" placeholder="ingresa tu contraseña" name="password" onChange={handleChange}></input>
 
                 <button type="submit"> Registrarse</button>
             </form>
