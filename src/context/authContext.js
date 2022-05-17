@@ -10,7 +10,7 @@ export const useAuth = () => {
 }
 
 export function AuthProvider({ children }) {
-    const signup = (email, password) =>
+    const signup = (email, password) => 
         createUserWithEmailAndPassword(auth, email, password);
 
     return (
