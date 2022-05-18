@@ -1,6 +1,6 @@
 import { Fragment, useState } from "react";
 import { useAuth } from "../context/authContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export function Register() {
     const [user, setUser] = useState({
@@ -81,6 +81,11 @@ export function Register() {
                         focus:shadow-outline"
                         type="submit"> Registrarse
                     </button>
+
+                    <p
+                    className="text-violet-300 my-4 text-sm flex justify-center px-6"> ¿Ya tienes una cuenta?
+                    <Link to="/login" className="pl-3"> Inicia Sesión </Link>
+                </p>
                 </form>
             </Fragment>
         </div>
