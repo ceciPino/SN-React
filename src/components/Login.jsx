@@ -1,6 +1,6 @@
 import { Fragment, useState } from "react";
 import { useAuth } from "../context/authContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export function Login() {
     const [user, setUser] = useState({
@@ -83,6 +83,8 @@ export function Login() {
                     className="bg-orange-100 hover:bg-orange-200 text-black shadow-md 
                     rounded border-2 border-gray-300 py-2 px-4 w-full"> Login with Google
                 </button>
+
+                <p> ¿No tienes una cuenta? <Link to="/register"> Registrar </Link></p>
             </Fragment>
         </div>
 
