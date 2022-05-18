@@ -15,7 +15,7 @@ export function Home() {
 
 
     return <div>
-        <h1> Hola {user.email} ! </h1>
+        <h1> Hola {user.displayName || user.email}! </h1>
 
         <button onClick={handleLogout}> Log Out </button>
     </div>;
